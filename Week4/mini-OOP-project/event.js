@@ -97,12 +97,39 @@ document.addEventListener('DOMContentLoaded', () => {
     eventArray.forEach((item) => {
 
         let eligible = ""
-        item.searchTickets(0,100).forEach((element,index)=> { eligible += `${index + 1}. ${element.type} $(${element.price})  `})
+        item.searchTickets(0,250).forEach((element,index)=> { eligible += `${index + 1}. ${element.type} $(${element.price})  `})
 
-        
         html += `<li>${item.name} - ${item.description} - Eligible tickets: ${eligible}`; 
     });
     document.querySelector('#event').innerHTML = html;
 });
+
+
+document.getElementById('submit').addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const priceMin = document.getElementById("user-price-min").value
+    const priceMax = document.getElementById("user-price-max").value
+
+    //Test to check if submit button works
+    console.log(priceMin, priceMax)
+
+})
+
+
+//GIVES NEW VALUES OF ELIGIBLE TICKETS
+document.addEventListener('DOMContentLoaded', () => {
+    let html = '';
+
+    eventArray.forEach((item) => {
+
+        let eligible = ""
+        item.searchTickets(priceMin,priceMax).forEach((element,index)=> { eligible += `${index + 1}. ${element.type} $(${element.price})  `})
+
+        html += `<li>${item.name} - ${item.description} - Eligible tickets: ${eligible}`; 
+    });
+    document.querySelector('#event').innerHTML = html;
+});
+
 
 
